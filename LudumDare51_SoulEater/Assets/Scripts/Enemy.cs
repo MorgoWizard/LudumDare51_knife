@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject soulPrefab;
 
-    private int health = 5;
+    [SerializeField]private int health = 5;
 
     private void Update()
     {
