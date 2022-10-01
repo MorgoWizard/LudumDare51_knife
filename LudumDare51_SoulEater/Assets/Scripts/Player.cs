@@ -1,9 +1,10 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    private int souls = 0;
+    [SerializeField]private int souls = 0;
     private int health = 10;
     private int maxHealth = 10;
 
@@ -92,6 +93,16 @@ public class Player : MonoBehaviour
     public void AddSoul()
     {
         souls++;
+    }
+
+    public int GetSouls()
+    {
+        return souls;
+    }
+
+    public void ResetSouls()
+    {
+        souls = 0;
     }
 
     private void OnCollisionEnter(Collision collision)

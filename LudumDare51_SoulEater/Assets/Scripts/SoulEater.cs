@@ -9,11 +9,23 @@ public class SoulEater : MonoBehaviour
     private int MaxScore;
     public int CostOfSoul = 1;
     public int HungryLevel = 1;
+
+    private int souls = 0;
+    private Player player;
+    private bool isPlayerNearby = false;
+
     void Start()
     {
         Score = 0;
         MaxScore = 1;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
+
+    private void Update()
+    {
+        GetPlayerSouls();
+    }
+
     public void EatSoul()
     {
         Score += CostOfSoul;
@@ -37,5 +49,29 @@ public class SoulEater : MonoBehaviour
     public float GetPercentOfHungry()
     {
         return Score / (float)MaxScore;
+    }
+
+    private void GetPlayerSouls()
+    {
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
+        {
+            souls += player.GetSouls();
+            player.ResetSouls();
+        } 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+        }
     }
 }
