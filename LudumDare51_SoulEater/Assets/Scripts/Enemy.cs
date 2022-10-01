@@ -8,11 +8,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            TakeDamage(1);
-        }
-
         if (health <= 0)
         {
             if (soulPrefab != null)
