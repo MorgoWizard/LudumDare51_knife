@@ -24,6 +24,7 @@ public class TemporalController : MonoBehaviour
             altarText.text = Altar.Digesting();
             TimerLock = true;
             LockTimer = 1;
+            
         }
         else 
         {

@@ -7,7 +7,7 @@ public class Sword : MonoBehaviour
     private Animator animator;
     private BoxCollider triggerCollider;
 
-    [SerializeField] private float damage = 1f;
+    [SerializeField] private int damage = 1;
     [SerializeField] private float cooldown = 1.5f;
     private bool canAttack = true;
 
@@ -16,8 +16,6 @@ public class Sword : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        animator.speed = 1f / cooldown;
-
         triggerCollider = GetComponent<BoxCollider>();
         triggerCollider.enabled = false;
     }

@@ -10,10 +10,8 @@ public class Player : MonoBehaviour
 
     private float _rotY, _rotX;
 
-
     [SerializeField] private Transform camTransform;
     [SerializeField] private HealthBar healthBar;
-
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
