@@ -8,7 +8,7 @@ public class TemporalController : MonoBehaviour
     private float Timer;
     private float LockTimer;
     public SoulEater Altar;
-    public Scrollbar HungerDisplay;
+    // public Scrollbar HungerDisplay;
     private bool TimerLock = false;
     void Start()
     {
@@ -29,6 +29,6 @@ public class TemporalController : MonoBehaviour
             LockTimer -= Time.deltaTime;
             if (LockTimer < 0) TimerLock = false;
         }
-        HungerDisplay.size = Altar.GetPercentOfHungry();
+        // HungerDisplay.size = Altar.GetPercentOfHungry();
     }
 }
