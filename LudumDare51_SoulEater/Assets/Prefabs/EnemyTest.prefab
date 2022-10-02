@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1560399387457392064}
+  - component: {fileID: 1560399387457392068}
   - component: {fileID: 1560399387457392071}
   - component: {fileID: 1560399387457392070}
   - component: {fileID: 1560399387457392069}
-  - component: {fileID: 1560399387457392068}
   - component: {fileID: 1560399387457392065}
   m_Layer: 0
   m_Name: EnemyTest
@@ -36,6 +36,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1560399387457392068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560399387457392075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37615ffdf7695144ac5f35e25c94685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulPrefab: {fileID: 3142055490705693579, guid: b13f4cfbbb54db640bcc21afaa46a863, type: 3}
+  health: 2
 --- !u!33 &1560399387457392071
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,19 +113,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1560399387457392068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560399387457392075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e37615ffdf7695144ac5f35e25c94685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soulPrefab: {fileID: 3142055490705693579, guid: b13f4cfbbb54db640bcc21afaa46a863, type: 3}
 --- !u!54 &1560399387457392065
 Rigidbody:
   m_ObjectHideFlags: 0

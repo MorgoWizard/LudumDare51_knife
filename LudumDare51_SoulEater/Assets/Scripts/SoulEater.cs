@@ -9,8 +9,7 @@ public class SoulEater : MonoBehaviour
     private int MaxScore;
     public int CostOfSoul = 1;
     public int HungryLevel = 1;
-
-    private int souls = 0;
+    
     private Player player;
     private bool isPlayerNearby = false;
 
@@ -55,7 +54,7 @@ public class SoulEater : MonoBehaviour
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            souls += player.GetSouls();
+            Score += player.GetSouls();
             player.ResetSouls();
         } 
     }
