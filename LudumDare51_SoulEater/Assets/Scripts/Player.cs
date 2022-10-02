@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private float _rotY, _rotX;
 
     [SerializeField] private Transform camTransform;
+    [SerializeField] private HealthBar healthBar;
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         Cursor.lockState = CursorLockMode.Locked;
         _rb = GetComponent<Rigidbody>();
         if (Camera.main != null) camTransform = Camera.main.transform;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
     {
         Rotate();
         Jump();
+        healthBar.SetHealth(_currentHealth);
         //Attack();
     }
 
