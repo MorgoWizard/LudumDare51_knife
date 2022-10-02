@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float rotY = 0f;
     private float rotX = 0f;
 
-    [SerializeField] private Transform camTransform;
+    private Transform camTransform;
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;

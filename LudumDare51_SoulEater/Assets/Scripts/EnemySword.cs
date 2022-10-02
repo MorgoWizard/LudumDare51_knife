@@ -1,37 +1,27 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(BoxCollider))]
-public class Sword : MonoBehaviour
+public class EnemySword : MonoBehaviour
 {
-    private Animator animator;
     private BoxCollider triggerCollider;
-
+    
     [SerializeField] private float damage = 1f;
     [SerializeField] private float cooldown = 1.5f;
     private bool canAttack = true;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        animator.speed = 1f / cooldown;
-
         triggerCollider = GetComponent<BoxCollider>();
         triggerCollider.enabled = false;
     }
 
-    private void Update()
+    public void Attack()
     {
-        Attack();
-    }
-
-    private void Attack()
-    {
-        if (!canAttack || !Input.GetMouseButtonDown(0))
+        if (!canAttack)
             return;
 
         triggerCollider.enabled = true;
-        animator.SetTrigger("Attack");
         canAttack = false;
         StartCoroutine(AttackCooldown());
     }
@@ -44,9 +34,9 @@ public class Sword : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Player"))
         {
-            other.GetComponent<Enemy>().TakeDamage(damage);
+            //other.GetComponent<Player>().TakeDamage(damage);
         }
     }
 

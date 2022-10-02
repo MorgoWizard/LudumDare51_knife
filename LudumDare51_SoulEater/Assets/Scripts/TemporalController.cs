@@ -22,7 +22,6 @@ public class TemporalController : MonoBehaviour
             Debug.Log(Altar.Digesting());
             TimerLock = true;
             LockTimer = 1;
-            
         }
         else 
         {
