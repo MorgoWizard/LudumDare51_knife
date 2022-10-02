@@ -4,10 +4,18 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject soulPrefab;
 
-    [SerializeField]private int health = 5;
+    [SerializeField]private float health = 5;
+    
+    [SerializeField] private HealthBar healthBar;
+
+    private void Start()
+    {
+        healthBar.SetMaxHealth(health);
+    }
 
     private void Update()
     {
+        healthBar.SetHealth(health);
         if (health <= 0)
         {
             if (soulPrefab != null)
@@ -16,7 +24,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
     }

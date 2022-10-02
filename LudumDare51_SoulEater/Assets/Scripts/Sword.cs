@@ -11,6 +11,8 @@ public class Sword : MonoBehaviour
     [SerializeField] private float cooldown = 1.5f;
     private bool canAttack = true;
 
+    [SerializeField] private EventController eventController;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -45,6 +47,7 @@ public class Sword : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
+            if(eventController.fireSword) other.GetComponent<StateChecker>().SetOnFire();
         }
     }
 

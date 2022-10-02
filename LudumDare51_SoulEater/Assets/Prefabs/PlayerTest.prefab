@@ -382,7 +382,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   souls: 0
-  camTransform: {fileID: 0}
+  maxHealth: 10
+  camTransform: {fileID: 7424933882912567653}
+  healthBar: {fileID: 0}
   speed: 7.5
   jumpForce: 7
   sensetivity: 5
