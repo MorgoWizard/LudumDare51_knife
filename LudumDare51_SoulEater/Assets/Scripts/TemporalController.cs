@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TemporalController : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI altarText;
     private float Timer;
     private float LockTimer;
     public SoulEater Altar;
@@ -19,7 +19,7 @@ public class TemporalController : MonoBehaviour
         Timer += Time.deltaTime;
         if (Mathf.Floor(Timer) % 11 == 10 && !TimerLock)
         {
-            Debug.Log(Altar.Digesting());
+            altarText.text = Altar.Digesting();
             TimerLock = true;
             LockTimer = 1;
             
