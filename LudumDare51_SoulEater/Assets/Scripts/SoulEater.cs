@@ -17,7 +17,6 @@ public class SoulEater : MonoBehaviour
     public AudioSource stage2ForPlay;
     public AudioSource stage3ForPlay;
     public AudioSource stage4ForPlay;
-    public AudioSource BackgroundMusic;
 
     void Start()
     {
