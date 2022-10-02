@@ -45,6 +45,7 @@ public class Sword : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
+            other.GetComponent<StateChecker>().SetOnFire();
         }
     }
 
