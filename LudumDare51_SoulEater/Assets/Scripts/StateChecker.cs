@@ -4,7 +4,7 @@ using UnityEngine;
 public class StateChecker : MonoBehaviour
 {
     private bool _onFire;
-    [SerializeField] private float fireDamage;
+    [SerializeField] private float fireDamage, fireTimer;
 
     [SerializeField] private Enemy enemy;
     private void FixedUpdate()
@@ -15,6 +15,18 @@ public class StateChecker : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (_onFire)
+            {
+                collision.gameObject.GetComponent<StateChecker>().SetOnFire();
+            }
+        }
+    }
+
     private IEnumerator OnFireStateTimer(float onFireTimer)
     {
         _onFire = true;
@@ -24,6 +36,6 @@ public class StateChecker : MonoBehaviour
     
     public void SetOnFire()
     {
-        StartCoroutine(OnFireStateTimer(3f));
+        StartCoroutine(OnFireStateTimer(fireTimer));
     }
 }
