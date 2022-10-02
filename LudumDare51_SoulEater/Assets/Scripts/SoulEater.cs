@@ -5,19 +5,21 @@ using UnityEngine.Events;
 
 public class SoulEater : MonoBehaviour
 {
-    public int Score;
-    private int MaxScore;
+    public int Score = 0;
+    public int MaxScore = 1;
     public int CostOfSoul = 1;
     public int HungryLevel = 1;
-
-    private int souls = 0;
+    
     private Player player;
     private bool isPlayerNearby = false;
 
+    public AudioSource stage1ForPlay;
+    public AudioSource stage2ForPlay;
+    public AudioSource stage3ForPlay;
+    public AudioSource stage4ForPlay;
+
     void Start()
     {
-        Score = 0;
-        MaxScore = 1;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
@@ -40,11 +42,27 @@ public class SoulEater : MonoBehaviour
     {
         Score -= HungryLevel;
         HungryLevel++;
-        if (Score == 0) return("Смерть");
-        else if (Score / MaxScore <= 0.1) return ("Я КРАЙНЕ ГОЛОДЕН!");
-        else if (Score / MaxScore <= 0.25) return ("Я Очень голоден!");
-        else if (Score / MaxScore <= 0.5) return ("Я голоден.");
-        else return ("Неплохо было бы поесть");
+        if (Score <= 0) return ("Смерть");
+        else if (Score / (float)MaxScore <= 0.1)
+        {
+            stage4ForPlay.Play();
+            return ("Я КРАЙНЕ ГОЛОДЕН!");
+        }
+        else if (Score / (float)MaxScore <= 0.25)
+        {
+            stage3ForPlay.Play();
+            return ("Я Очень голоден!");
+        }
+        else if (Score / (float)MaxScore <= 0.5)
+        {
+            stage2ForPlay.Play();
+            return ("Я голоден.");
+        }
+        else
+        {
+            stage1ForPlay.Play();
+            return ("Неплохо было бы поесть");
+        }
     }
     public float GetPercentOfHungry()
     {
@@ -55,7 +73,8 @@ public class SoulEater : MonoBehaviour
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            souls += player.GetSouls();
+            Score += player.GetSouls();
+            MaxScore += player.GetSouls();
             player.ResetSouls();
         } 
     }

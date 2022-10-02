@@ -31,6 +31,14 @@ public class Enemy : MonoBehaviour
         agent.stoppingDistance = 0f;
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+    [SerializeField]private float health = 5;
+    
+    [SerializeField] private HealthBar healthBar;
+
+    private void Start()
+    {
+        healthBar.SetMaxHealth(health);
     }
 
     protected void Update()
@@ -59,7 +67,7 @@ public class Enemy : MonoBehaviour
 
             if (distance <= attackRadius)
             {
-                //Debug.Log("В атаку!");
+                //Debug.Log("пїЅ пїЅпїЅпїЅпїЅпїЅ!");
                 if (canAttack)
                 {
                     Attack();
@@ -118,6 +126,8 @@ public class Enemy : MonoBehaviour
         Vector3[] corners = agent.path.corners;
 
         if (corners.Length > 2)
+        healthBar.SetHealth(health);
+        if (health <= 0)
         {
             for (int i = 0; i < agent.path.corners.Length - 1; i++)
             {

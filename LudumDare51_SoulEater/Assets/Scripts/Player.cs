@@ -1,37 +1,42 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    [SerializeField]private int souls = 0;
-    private int health = 10;
-    private int maxHealth = 10;
+    [SerializeField] private int souls;
+    
+    [SerializeField] private int maxHealth = 10;
+    private int _currentHealth;
 
-    private float rotY = 0f;
-    private float rotX = 0f;
+    private float _rotY, _rotX;
 
-    private Transform camTransform;
+
+    [SerializeField] private Transform camTransform;
+    [SerializeField] private HealthBar healthBar;
+
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float sensetivity = 5f;
 
-    private bool isGrounded = true;
+    private bool _isGrounded = true;
 
-    private Rigidbody rb;
+    private Rigidbody _rb;
 
     private void Start()
     {
+        _currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         Cursor.lockState = CursorLockMode.Locked;
-        rb = GetComponent<Rigidbody>();
-        camTransform = Camera.main.transform;
+        _rb = GetComponent<Rigidbody>();
+        if (Camera.main != null) camTransform = Camera.main.transform;
     }
 
     private void Update()
     {
         Rotate();
         Jump();
+        healthBar.SetHealth(_currentHealth);
         //Attack();
     }
 
@@ -42,18 +47,18 @@ public class Player : MonoBehaviour
 
     private void Rotate()
     {
-        rotX += Input.GetAxis("Mouse Y") * sensetivity;
-        rotY += Input.GetAxis("Mouse X") * sensetivity;
+        _rotX += Input.GetAxis("Mouse Y") * sensetivity;
+        _rotY += Input.GetAxis("Mouse X") * sensetivity;
 
-        rotX = rotX < 75f ? rotX : 75f;
-        rotX = rotX > -75f ? rotX : -75f;
+        _rotX = _rotX < 75f ? _rotX : 75f;
+        _rotX = _rotX > -75f ? _rotX : -75f;
 
-        camTransform.rotation = Quaternion.Euler(-rotX, rotY, 0f);
+        camTransform.rotation = Quaternion.Euler(-_rotX, _rotY, 0f);
     }
 
     private void Move()
     {
-        if (!isGrounded)
+        if (!_isGrounded)
             return;
 
         Vector3 forward = camTransform.forward;
@@ -66,27 +71,27 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            _rb.AddForce(forward * (speed * Time.fixedDeltaTime), ForceMode.VelocityChange);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(-forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            _rb.AddForce(-forward * (speed * Time.fixedDeltaTime), ForceMode.VelocityChange);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddForce(right * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            _rb.AddForce(right * (speed * Time.fixedDeltaTime), ForceMode.VelocityChange);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddForce(-right * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            _rb.AddForce(-right * (speed * Time.fixedDeltaTime), ForceMode.VelocityChange);
         }
     }
 
     private void Jump()
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            _rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
 
@@ -109,14 +114,14 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            _isGrounded = true;
         }
     }
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = false;
+            _isGrounded = false;
         }
     }
 }
