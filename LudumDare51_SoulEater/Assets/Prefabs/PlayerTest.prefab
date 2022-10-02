@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   cooldown: 1.5
+  eventController: {fileID: 0}
 --- !u!1 &7424933884802267809
 GameObject:
   m_ObjectHideFlags: 0

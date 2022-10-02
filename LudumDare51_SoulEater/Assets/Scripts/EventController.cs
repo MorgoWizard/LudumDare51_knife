@@ -1,23 +1,25 @@
+using TMPro;
 using UnityEngine;
 
 public class EventController : MonoBehaviour
 {
     public bool fireSword;
 
+    [SerializeField] private TextMeshProUGUI eventMesseege;
+
     public void RandomEvent()
     {
         ResetEvents();
         int caseNumber = Random.Range(1, 3);
-        Debug.Log(caseNumber);
         switch (caseNumber)
         {
             case(1):
                 fireSword = true;
-                Debug.Log("Sword is on fire!");
+                eventMesseege.text = "FIRE SWORD!";
                 break;
             case(2):
                 fireSword = false;
-                Debug.Log("Second Event");
+                eventMesseege.text = "not FIRE SWORD!";
                 break;
         }
 
