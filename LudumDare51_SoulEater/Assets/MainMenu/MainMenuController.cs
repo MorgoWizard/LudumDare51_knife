@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MainMenuController : MonoBehaviour
     public SoulEater VolumeControl;
     public Slider SetVolumeAudio;
     public Slider SetVolumeMusic;
+    [SerializeField] private TextMeshProUGUI MaxScore;
 
     public void ChangeVolumeAudio()
     {
@@ -22,7 +24,25 @@ public class MainMenuController : MonoBehaviour
     {
         VolumeControl.BackgroundMusic.volume = SetVolumeMusic.value;
     }
-
+    public void ExitGame()
+    {
+        PlayerPrefs.SetInt("MaxScore", VolumeControl.GetMaxScore());
+        PlayerPrefs.Save();
+        Debug.Log("Game data saved!");
+        Application.Quit();
+    }
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("MaxScore"))
+        {
+            VolumeControl.SetMaxScore(PlayerPrefs.GetInt("MaxScore"));
+            
+            Debug.Log("Game data loaded!");
+        }
+        else
+            Debug.Log("There is no save data!");
+        MaxScore.text = "MAX\nSCORE\n" + VolumeControl.GetMaxScore();
+    }
 
     private void Update()
     {

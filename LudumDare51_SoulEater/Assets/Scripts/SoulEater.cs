@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public class SoulEater : MonoBehaviour
 {
     public int Score = 0;
-    public int MaxScore = 1;
+    public int MaxScore = 0;
+    public int CurrentMaxScore = 0;
     public int CostOfSoul = 1;
     public int HungryLevel = 1;
     
@@ -22,6 +23,7 @@ public class SoulEater : MonoBehaviour
 
     void Start()
     {
+        CurrentMaxScore = 0;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
@@ -33,29 +35,29 @@ public class SoulEater : MonoBehaviour
     public void EatSoul()
     {
         Score += CostOfSoul;
-        MaxScore += CostOfSoul;
+        CurrentMaxScore += CostOfSoul;
     }
     public void EatSoul(int Count)
     {
         Score += CostOfSoul * Count;
-        MaxScore += CostOfSoul * Count;
+        CurrentMaxScore += CostOfSoul * Count;
     }
     public string Digesting()
     {
         Score -= HungryLevel;
         HungryLevel++;
         if (Score <= 0) return ("Смерть");
-        else if (Score / (float)MaxScore <= 0.1)
+        else if (HungryLevel+0.5f >= Score )
         {
             stage4ForPlay.Play();
             return ("Я КРАЙНЕ ГОЛОДЕН!");
         }
-        else if (Score / (float)MaxScore <= 0.25)
+        else if (2 * HungryLevel + 2 >= Score)
         {
             stage3ForPlay.Play();
             return ("Я Очень голоден!");
         }
-        else if (Score / (float)MaxScore <= 0.5)
+        else if (3 * HungryLevel + 4.5f >= Score)
         {
             stage2ForPlay.Play();
             return ("Я голоден.");
@@ -66,9 +68,14 @@ public class SoulEater : MonoBehaviour
             return ("Неплохо было бы поесть");
         }
     }
-    public float GetPercentOfHungry()
+    public int GetMaxScore()
     {
-        return Score / (float)MaxScore;
+        if(MaxScore > CurrentMaxScore) return MaxScore;
+        else return CurrentMaxScore;
+    }
+    public void SetMaxScore(int Value)
+    {
+        MaxScore = Value;
     }
 
     private void GetPlayerSouls()
@@ -76,7 +83,7 @@ public class SoulEater : MonoBehaviour
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Score += player.GetSouls();
-            MaxScore += player.GetSouls();
+            CurrentMaxScore += player.GetSouls();
             player.ResetSouls();
         } 
     }
