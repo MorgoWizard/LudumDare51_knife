@@ -46,7 +46,7 @@ public class MainMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             StandartHUD.SetActive(!StandartHUD.activeSelf);
             MainMenu.SetActive(!MainMenu.activeSelf);
