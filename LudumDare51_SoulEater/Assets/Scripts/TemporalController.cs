@@ -20,7 +20,7 @@ public class TemporalController : MonoBehaviour
         Timer += Time.deltaTime;
         if (Mathf.Floor(Timer) % 11 == 10 && !TimerLock)
         {
-            eventController.RandomEvent();
+            //eventController.RandomEvent();
             altarText.text = Altar.Digesting();
             TimerLock = true;
             LockTimer = 1;

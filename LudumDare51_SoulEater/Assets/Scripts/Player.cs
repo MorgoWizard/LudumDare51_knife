@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -6,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int souls;
     
     [SerializeField] private int maxHealth = 10;
-    private int _currentHealth;
+    private float _currentHealth;
 
     private float _rotY, _rotX;
 
@@ -19,11 +20,14 @@ public class Player : MonoBehaviour
 
     private bool _isGrounded = true;
 
+    [SerializeField] private float regenTime = 3f;
+    private bool canRegen = true;
+
     private Rigidbody _rb;
 
     private void Start()
     {
-        _currentHealth = maxHealth;
+        _currentHealth = (float)maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         Cursor.lockState = CursorLockMode.Locked;
         _rb = GetComponent<Rigidbody>();
@@ -34,6 +38,10 @@ public class Player : MonoBehaviour
     {
         Rotate();
         Jump();
+        if (canRegen && _currentHealth < maxHealth)
+        {
+            _currentHealth += Time.deltaTime;
+        }
         healthBar.SetHealth(_currentHealth);
         //Attack();
     }
@@ -106,6 +114,27 @@ public class Player : MonoBehaviour
     public void ResetSouls()
     {
         souls = 0;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+
+        if (canRegen == false)
+            StopCoroutine(RegenerationCooldown());
+        canRegen = false;
+        StartCoroutine(RegenerationCooldown());
+
+        if (_currentHealth <= 0)
+        {
+            Debug.LogError("Ты помер");
+        }
+    }
+
+    private IEnumerator RegenerationCooldown()
+    {
+        yield return new WaitForSeconds(regenTime);
+        canRegen = true;
     }
 
     private void OnCollisionEnter(Collision collision)
