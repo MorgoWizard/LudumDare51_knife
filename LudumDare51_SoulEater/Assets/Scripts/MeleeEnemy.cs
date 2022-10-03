@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
-    [SerializeField] private Animator swordAnimator;
-
     protected override void Attack()
     {
-        swordAnimator.SetTrigger("Attack");
-        swordAnimator.GetComponent<EnemySword>().Attack();
+        animator.SetTrigger("Attack");
+        animator.GetComponent<EnemySword>().Attack();
     }
 }

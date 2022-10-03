@@ -16,6 +16,7 @@ public class Sword : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        animator.speed = 1f / cooldown;
         triggerCollider = GetComponent<BoxCollider>();
         triggerCollider.enabled = false;
     }

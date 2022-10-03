@@ -385,7 +385,7 @@ MonoBehaviour:
   stopAfterPoint: 0
   soulPrefab: {fileID: 3142055490705693579, guid: b13f4cfbbb54db640bcc21afaa46a863, type: 3}
   healthBar: {fileID: 358759574189734217}
-  swordAnimator: {fileID: 6165432594160506369}
+  animator: {fileID: 6165432594160506369}
 --- !u!195 &358759575461399714
 NavMeshAgent:
   m_ObjectHideFlags: 0
