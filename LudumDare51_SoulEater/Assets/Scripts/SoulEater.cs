@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,8 @@ public class SoulEater : MonoBehaviour
     private Player player;
     private bool isPlayerNearby = false;
 
+    [SerializeField] private TextMeshProUGUI eaterOutput;
+    
     public AudioSource stage1ForPlay;
     public AudioSource stage2ForPlay;
     public AudioSource stage3ForPlay;
@@ -25,6 +28,7 @@ public class SoulEater : MonoBehaviour
     {
         CurrentMaxScore = 0;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        eaterOutput.text = Score + "/" + HungryLevel;
     }
 
     private void Update()
@@ -46,26 +50,31 @@ public class SoulEater : MonoBehaviour
     {
         Score -= HungryLevel;
         HungryLevel++;
-        if (Score <= 0) return ("Смерть");
+        eaterOutput.text = Score + "/" + HungryLevel;
+        if (Score <= 0)
+        {
+            player.TakeDamage(999);
+            return ("Death");
+        }
         else if (HungryLevel+0.5f >= Score )
         {
             stage4ForPlay.Play();
-            return ("Я КРАЙНЕ ГОЛОДЕН!");
+            return ("I am REALLY hungry!");
         }
         else if (2 * HungryLevel + 2 >= Score)
         {
             stage3ForPlay.Play();
-            return ("Я Очень голоден!");
+            return ("I'm very hungry");
         }
         else if (3 * HungryLevel + 4.5f >= Score)
         {
             stage2ForPlay.Play();
-            return ("Я голоден.");
+            return ("I'm hungry");
         }
         else
         {
             stage1ForPlay.Play();
-            return ("Неплохо было бы поесть");
+            return ("It would be nice to eat");
         }
     }
     public int GetMaxScore()
@@ -85,6 +94,7 @@ public class SoulEater : MonoBehaviour
             Score += player.GetSouls();
             CurrentMaxScore += player.GetSouls();
             player.ResetSouls();
+            eaterOutput.text = Score + "/" + HungryLevel;
         } 
     }
 

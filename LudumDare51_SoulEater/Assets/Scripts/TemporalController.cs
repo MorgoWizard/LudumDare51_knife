@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TemporalController : MonoBehaviour
 {
@@ -32,5 +33,11 @@ public class TemporalController : MonoBehaviour
             if (LockTimer < 0) TimerLock = false;
         }
         // HungerDisplay.size = Altar.GetPercentOfHungry();
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

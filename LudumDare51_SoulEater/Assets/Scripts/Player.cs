@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -11,12 +12,15 @@ public class Player : MonoBehaviour
 
     private float _rotY, _rotX;
 
+    [SerializeField] private TextMeshProUGUI soulOutput;
+
     [SerializeField] private Transform camTransform;
     [SerializeField] public HealthBar healthBar;
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float sensetivity = 5f;
+    [SerializeField] private GameObject deathScreen;
 
     private bool _isGrounded = true;
 
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        soulOutput.text = souls + "";
     }
 
     private void Rotate()
@@ -103,7 +108,7 @@ public class Player : MonoBehaviour
 
     public void AddSoul()
     {
-        souls++;
+        souls += Random.Range(1,7);
     }
 
     public int GetSouls()
@@ -127,7 +132,8 @@ public class Player : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            Debug.LogError("Ты помер");
+            deathScreen.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 
