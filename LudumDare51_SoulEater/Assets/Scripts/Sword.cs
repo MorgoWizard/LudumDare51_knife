@@ -34,6 +34,7 @@ public class Sword : MonoBehaviour
         animator.SetTrigger("Attack");
         canAttack = false;
         StartCoroutine(AttackCooldown());
+        
     }
 
     private IEnumerator AttackCooldown()
