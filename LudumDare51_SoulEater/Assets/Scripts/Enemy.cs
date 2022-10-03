@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private float attackCooldown = 1f;
     protected bool canAttack = true;
 
-    [SerializeField] private Transform patrolZoneCenter;
+    [SerializeField] public Transform patrolZoneCenter;
     [SerializeField] private float randomPointRadius;
     [SerializeField] private float stopAfterPoint;
     private bool pathComplete = false;
@@ -162,7 +162,7 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, agroRadius);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(patrolZoneCenter.position, randomPointRadius);
+        if (patrolZoneCenter != null) Gizmos.DrawWireSphere(patrolZoneCenter.position, randomPointRadius);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
     }

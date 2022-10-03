@@ -381,7 +381,7 @@ MonoBehaviour:
   agroRadius: 10
   attackRadius: 1.85
   patrolZoneCenter: {fileID: 0}
-  randomPointRadius: 20
+  randomPointRadius: 90
   stopAfterPoint: 0
   soulPrefab: {fileID: 3142055490705693579, guid: b13f4cfbbb54db640bcc21afaa46a863, type: 3}
   healthBar: {fileID: 358759574189734217}
