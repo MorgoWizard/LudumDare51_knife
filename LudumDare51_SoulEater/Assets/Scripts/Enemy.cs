@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,9 +26,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject soulPrefab;
     [SerializeField] private HealthBar healthBar;
-
+    [SerializeField] protected Animator animator;
     protected void Awake()
     {
+        animator.speed = 1f / attackCooldown;
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 0f; 
         healthBar.SetMaxHealth(health);
@@ -144,7 +146,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        Debug.Log("≈бака получил урон");
+
         if (health <= 0)
             Die();
     }

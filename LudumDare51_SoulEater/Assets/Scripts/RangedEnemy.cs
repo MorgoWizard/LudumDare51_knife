@@ -13,11 +13,12 @@ public class RangedEnemy : Enemy
 
     private void Start()
     {
-        progectileSpawner.localEulerAngles = new Vector3(0f, 0f, -angleInDegrees);
+        progectileSpawner.localEulerAngles = new Vector3(0f, -90f, -angleInDegrees);
     }
 
     protected override void Attack()
     {
+        animator.SetTrigger("Attack");
         Vector3 direction = target.position - transform.position;
         Vector3 directionXZ = new Vector3(direction.x, 0f, direction.z);
 
@@ -29,6 +30,7 @@ public class RangedEnemy : Enemy
         float v2 = (g * x * x) / (2 * (y - Mathf.Tan(angleInRadians) * x) * Mathf.Pow(Mathf.Cos(angleInRadians), 2));
         float v = Mathf.Sqrt(Mathf.Abs(v2));
 
+        Debug.Log("Стреляю");
         GameObject newProjectile = Instantiate(projectile, progectileSpawner.position, Quaternion.identity);
         newProjectile.transform.rotation = progectileSpawner.rotation;
         newProjectile.GetComponent<Rigidbody>().velocity = progectileSpawner.up * v;
