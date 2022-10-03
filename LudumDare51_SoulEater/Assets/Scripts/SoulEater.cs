@@ -18,6 +18,8 @@ public class SoulEater : MonoBehaviour
     public AudioSource stage3ForPlay;
     public AudioSource stage4ForPlay;
 
+    public AudioSource BackgroundMusic;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
