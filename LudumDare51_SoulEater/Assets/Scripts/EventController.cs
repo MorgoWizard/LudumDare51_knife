@@ -7,24 +7,24 @@ public class EventController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI eventMesseege;
 
-    public void RandomEvent()
-    {
-        ResetEvents();
-        int caseNumber = Random.Range(1, 3);
-        switch (caseNumber)
-        {
-            case(1):
-                fireSword = true;
-                eventMesseege.text = "FIRE SWORD!";
-                break;
-            case(2):
-                fireSword = false;
-                eventMesseege.text = "not FIRE SWORD!";
-                break;
-        }
+    //public void RandomEvent()
+    //{
+    //    ResetEvents();
+    //    int caseNumber = Random.Range(1, 3);
+    //    switch (caseNumber)
+    //    {
+    //        case(1):
+    //            fireSword = true;
+    //            eventMesseege.text = "FIRE SWORD!";
+    //            break;
+    //        case(2):
+    //            fireSword = false;
+    //            eventMesseege.text = "not FIRE SWORD!";
+    //            break;
+    //    }
 
-        Random.Range(1, 2);
-    }
+    //    Random.Range(1, 2);
+    //}
 
     private void ResetEvents()
     {

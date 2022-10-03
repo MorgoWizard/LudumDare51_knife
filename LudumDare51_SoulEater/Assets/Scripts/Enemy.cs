@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-
+        Debug.Log("≈бака получил урон");
         if (health <= 0)
             Die();
     }

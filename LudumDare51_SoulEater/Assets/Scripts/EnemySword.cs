@@ -21,7 +21,6 @@ public class EnemySword : MonoBehaviour
         if (!canAttack)
             return;
 
-        triggerCollider.enabled = true;
         canAttack = false;
         StartCoroutine(AttackCooldown());
     }
@@ -34,11 +33,14 @@ public class EnemySword : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // коллайдер активируется в анимации
         if (other.CompareTag("Player"))
         {
-            //other.GetComponent<Player>().TakeDamage(damage);
+            Debug.Log("Ебака наносит ответный удар");
+            other.GetComponent<Player>().TakeDamage(damage);
         }
     }
 
+    public void EnableCollider() => triggerCollider.enabled = true;
     public void DisableCollider() => triggerCollider.enabled = false;
 }

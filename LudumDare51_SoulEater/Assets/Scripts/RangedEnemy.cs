@@ -32,5 +32,6 @@ public class RangedEnemy : Enemy
         GameObject newProjectile = Instantiate(projectile, progectileSpawner.position, Quaternion.identity);
         newProjectile.transform.rotation = progectileSpawner.rotation;
         newProjectile.GetComponent<Rigidbody>().velocity = progectileSpawner.up * v;
+        Destroy(newProjectile, 5f);
     }
 }
