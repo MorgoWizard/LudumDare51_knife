@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         if (soulPrefab != null)
-            Instantiate(soulPrefab, transform.position, Quaternion.identity);
+            Instantiate(soulPrefab, new Vector3(transform.position.x,1.5f,transform.position.z), Quaternion.identity);
 
         Destroy(gameObject);
     }
